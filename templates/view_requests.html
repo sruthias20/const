@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - About{% endblock %}
+{% block body %}
+<!-- start about -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">USER <span>REQUESTS</span></h2>
+            </div>
+            {% if user_model == 'architecture' %}
+            {% for i in data %}
+            <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                <div class="media">
+                    <div class="media-heading-wrapper">
+                        <div class="media-object pull-left">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <h3 class="media-heading">Booking Person :{{i.BookingPerson}}</h3>
+                        <p>
+                            SquareFeet : {{i.SquareFeet}}<br>
+                            Estimated budget :{{i.Budget}}<br>
+                            Plotsize : {{i.Plotsize}}<br>
+                            Message : {{i.Message}}
+
+                        </p>
+                    </div>
+                    <div class="media-body">
+                        <img src="/{{i.Plotpic}}" style="width:150px;height:100px;">
+                        <a href="{% url 'download_image' i.Plotpic %}" class="btn btn-primary">Download</a><br>
+                        user rough image:<br>
+                        <img src="/{{i.Rougharchitecture}}" style="width:150px;height:100px;">
+                        <a href="{% url 'download_image' i.Rougharchitecture %}" class="btn btn-primary">Download</a> 
+                        <form method="POST" action="{% url 'status_update' i.PersonID %}">
+                            {% csrf_token %}
+                            <select name="status" style="color: black;">
+                                <option>Select your status</option>
+                                <option value="accept">Accept</option>
+                                <option value="declined">Decline</option>
+                            </select>
+                            <input type="submit" value="submit" class="btn btn-success">
+                        </form>
+                    </div>
+                    <div>
+                        {% if i.status == 'accept' %}
+                        <h4>Submit your Rate</h4>
+                        <form method="POST" action="{% url 'architectrate' i.PersonID %}">
+                            {% csrf_token %}
+                            <input type="text" name="rate" style="color: black;">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>User Response : {{i.RequestfromArchitect}}</h4>
+                        <p>Payment Status :{{i.Payment}}</p>
+                    </div>
+                    {% if i.Payment == 'success' %}
+                    <div>
+                        <form method="POST" action="{% url 'architectdesign' i.PersonID %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="design">
+                            <input type="submit" class="btn btn-info" value="Submit">
+                        </form>
+                    </div>
+                    {% endif %}
+                    User Response to design :{{i.interest}}
+                </div>
+            </div>
+            {% endfor %}
+            {% elif user_model == 'designer' %}
+            {% for i in data %}
+            <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                <div class="media">
+                    <div class="media-heading-wrapper">
+                        <div class="media-object pull-left">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <h3 class="media-heading">Booking Person :{{i.BookingPerson}}</h3>
+                        <p>
+                            HomeStyle : {{i.HomeStyle}}<br>
+                            Plotsize : {{i.Plotsize}}<br>
+                            Message : {{i.Message}}
+
+                        </p>
+                    </div>
+                    <div class="media-body">
+                        <img src="/{{i.Plotpic}}" style="width:150px;height:100px;">
+
+                        <a href="{% url 'download_image' i.Plotpic %}" class="btn btn-primary">Download</a>
+                        <form method="POST" action="{% url 'status_update' i.PersonID %}">
+                            {% csrf_token %}
+                            <select name="status" style="color: black;">
+
+                                <option>Select your status</option>
+                                <option value="accept">Accept</option>
+                                <option value="declined">Decline</option>
+                            </select>
+                            <input type="submit" value="submit" style="color: black;" class="btn btn-primary">
+                        </form>
+                    </div>
+                    <div>
+                        {% if i.status == 'accept' %}
+                        <h4>Submit your Rate</h4>
+                        <form method="POST" action="{% url 'architectrate' i.PersonID %}">
+                            {% csrf_token %}
+                            <input type="text" name="rate" style="color: black;">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>User Response : {{i.RequestfromDesigner}}</h4>
+                        <p>Payment Status :{{i.Payment}}</p>
+                    </div>
+                    {% if i.Payment == 'success' %}
+                    <div>
+                        <form method="POST" action="{% url 'architectdesign' i.PersonID %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="design">
+                            <input type="submit" class="btn btn-info" value="Submit">
+                        </form>
+                    </div>
+                    {% endif %}
+                    User Response to design :{{i.interest}}
+                </div>
+            </div>
+            {% endfor %}
+            {% elif user_model == 'contractor' %}
+            {% for i in data %}
+            <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                <div class="media">
+                    <div class="media-heading-wrapper">
+                        <div class="media-object pull-left">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <h3 class="media-heading">Booking Person :{{i.BookingPerson}}</h3>
+                        <p>
+                            SquareFeet : {{i.SquareFeet}}<br>
+                            Estimated TimeLimit :{{i.TimeLimit}}<br>
+                            Plotsize : {{i.Plotsize}}<br>
+                            Message : {{i.Message}}
+
+                        </p>
+                    </div>
+                    <div class="media-body">
+                        Home 3D
+                        <img src="/{{i.Plotpic}}" style="width:150px;height:100px;">
+                        <a href="{% url 'download_image' i.Plotpic %}" class="btn btn-primary">Download</a><br>
+                        Plan
+                        <img src="/{{i.Plan}}" style="width:150px;height:100px;">
+                        <a href="{% url 'download_image' i.Plan %}" class="btn btn-primary">Download</a>
+                        <form method="POST" action="{% url 'status_update' i.PersonID %}">
+                            {% csrf_token%}
+                            <select name="status" style="color:black;">
+                                
+                                <option style="color:black;">Select your status</option>
+                                <option value="accept">Accept</option>
+                                <option value="declined">Decline</option>
+                            </select>
+                            <input type="submit" value="submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                    <div>
+                        {% if i.status == 'accept' %}
+                        <h4>Submit your Rate</h4>
+                        <form method="POST" action="{% url 'architectrate' i.PersonID %}">
+                            {% csrf_token %}
+                            <input type="text" name="rate" style="color: black;">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>User Response : {{i.RequestfromContractor}}</h4>
+                        <p>Payment Status :{{i.Payment}}</p>
+                    </div>
+                    {% if i.Payment == 'success' %}
+                    <div>
+                        <h4>Payment Success</h4>
+                    </div>
+                    {% elif i.Payment == 'failed' %}
+                    <div>
+                        <h4>Payment failed</h4>
+                    </div>
+                    {% else %}
+                    <div>
+                        <h4>Payment pending</h4>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- end about -->
+{% endblock %}

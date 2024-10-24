@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - Booking{% endblock %}
+{% block body %}
+
+<!-- start registration-->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s"> <span>BOOK </span>AN APPOINMENT
+                </h2>
+            </div>
+            {% if messages %}
+                    <div class="alert alert-danger">
+                    {% for i in messages %}
+                    {{i}}
+                    {% endfor %}
+                </div>
+                    {% endif %}
+                    {% if logged_in_user %}
+            <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-offset="50" data-wow-delay="0.6s" style="padding-left: 250px;width: 920px;">
+                    {% if user == 'architecture' %}
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label>NAME</label>
+                        <input name="fullname" type="text" class="form-control" id="fullname" value="{{logged_in_user.Name}}" required>
+    
+                        <label>USER_ID</label>
+                        <input name="id" type="text" class="form-control" id="id" value="{{logged_in_user.id}}" required>
+    
+                        <label>MAX SQUAREFEET</label>
+                        <input name="sqft" type="text" class="form-control" id="sqft" required>
+    
+                        <label>ESTIMATED BUDGET</label>
+                        <input name="budget" type="text" class="form-control" id="budget" required>
+                        <label>SELECT ARCHITECT</label>
+                        <input name="architect" type="text" class="form-control" id="architect" value="{{booking_for.Name}}" required>
+                        <label>PLOT SIZE</label>
+                        <input name="plotsize" type="text" class="form-control" id="plotsize" required> 
+                        <label>PLOT OUTLINE</label>
+                        <input name="plotpic" type="file" class="form-control" id="plotpic" required>
+                        <label>Rough Architecture Design</label>
+                        <input name="roughpic" type="file" class="form-control" id="plotpic" required>
+                        <label>MESSAGE</label>
+                        <textarea name="message" class="form-control"></textarea>
+                        <input type="submit" class="form-control" value="Book Now" required>
+                    </form> 
+                    {% elif user == 'contractor' %}
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label>NAME</label>
+                        <input name="fullname" type="text" class="form-control" id="fullname" value="{{logged_in_user.Name}}" required>
+    
+                        <label>USER_ID</label>
+                        <input name="id" type="text" class="form-control" id="id" value="{{logged_in_user.id}}" required>
+    
+                        <label>SQUAREFEET</label>
+                        <input name="sqft" type="text" class="form-control" id="sqft" required>
+    
+                        <label>TIME LIMIT</label>
+                        <input name="timelimit" type="text" class="form-control" id="timelimit" required>
+                        <label>SELECTED CONTRACTOR</label>
+                        <input name="contractor" type="text" class="form-control" id="contractor" value="{{booking_for.Name}}" required>
+                        <label>PLOT SIZE</label>
+                        <input name="plotsize" type="text" class="form-control" id="plotsize" required>
+                        <label>PLAN AND DESIGN</label>
+                        <input name="plotpic" type="file" class="form-control" id="plotpic" required>
+                        <input name="plan" type="file" class="form-control" id="plan" required >
+                        <label>MESSAGE</label>
+                        <textarea name="message" class="form-control"></textarea>
+                        <input type="submit" class="form-control" value="Book Now" required>
+                    </form> 
+                    {% elif user == 'designer' %}
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label>NAME</label>
+                        <input name="fullname" type="text" class="form-control" id="fullname" value="{{logged_in_user.Name}}" required>
+    
+                        <label>USER_ID</label>
+                        <input name="id" type="text" class="form-control" id="id" value="{{logged_in_user.id}}" required>
+    
+                        
+    
+                        <label>STYLE OF HOME</label>
+                        <select name="homestyle" id="homestyle" class="form-control">
+                            <option>Select a style for your home</option>
+                            <option value="cottage">Traditional</option>
+                            <option value="colonical">Colonical</option>
+                            <option value="contemporary">Contemporary</option>
+                            <option value="rowhouse">Row House Style</option>
+                        </select>
+                        <label>SELECTED DESIGNER</label>
+                        <input name="contractor" type="text" class="form-control" id="contractor" value="{{booking_for.Name}}" required>
+                        <label>PLOT SIZE</label>
+                        <input name="plotsize" type="text" class="form-control" id="plotsize" required>
+                        <label>ARCHITECTURE PLAN</label>
+                        <input name="plotpic" type="file" class="form-control" id="plotpic" required>
+                        
+                        <label>MESSAGE</label>
+                        <textarea name="message" class="form-control"></textarea>
+                        <input type="submit" class="form-control" value="Book Now" required>
+                    </form> 
+                    {% endif %}
+            </div>
+            {% else %}
+            <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-offset="50" data-wow-delay="0.6s" style="padding-left: 250px;width: 920px;">
+                You have to loggin for booking <a href="/login"> <button class="btn btn-info">Login here</button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- end registration -->
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - Team{% endblock %}
+{% block body %}
+    <!-- start team -->
+     <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s"><span>AWESOME</span> TEAM</h2>
+                </div>
+                {% for i in users %}
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-offset="50" data-wow-delay="1.3s">
+                    <div class="team-wrapper">
+                        <img src="/{{i.ProfilePic}}" class="img-responsive" alt="team img 1">
+                            <div class="team-des">
+                                <h4>{{i.Name}}</h4>
+                                <span>{{i.Email}}</span>
+                                <p>{{i.PhoneNumber}}</p>
+                                <a href="/booking/{{user}}/{{i.id}}"><button class="btn btn-info">Book Now</button></a>
+                            </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- end team -->
+    {% endblock %}

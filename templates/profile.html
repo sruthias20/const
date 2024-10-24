@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - Profile{% endblock %}
+{% block body %}
+  	<!-- start service -->
+      <section id="service">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">YOUR <span> PROFILE</span> </h2>
+                </div>
+                <div class="col-md-4 wow fadeIn" data-wow-offset="50" data-wow-delay="0.6s">
+                    <img src="/{{logged_in_user.ProfilePic}}" alt="no image" style="width: 100px;height: 100px;">
+                    <h4>Name : {{logged_in_user.Name}}</h4>
+                    <p>EmailID : {{logged_in_user.Email}}</p>
+                    <p>PAssword : {{logged_in_user.Password}}</p>
+                    <p>Phone Number : {{logged_in_user.PhoneNumber}}</p>
+                    <p><a href="/updateprofile"><button class="btn btn-info">Update</button></a></p>
+                </div>
+                {% if usertype == 'designer' or usertype == 'architecture' %}
+                <div class="col-md-4 active wow fadeIn" data-wow-offset="50" data-wow-delay="0.9s">
+                    <i class="fa fa-cloud"></i>
+                    <h4>My Works</h4>
+                    <p>Click to view your works </p>
+                    <p>Click to view your works </p>
+                    <p>Click to view your works </p>
+                    <p>Click to view your works </p>
+                    <p><a href="/myworks"><button class="btn btn-info">View my works</button></a></p>
+                </div>
+                <div class="col-md-4 wow fadeIn" data-wow-offset="50" data-wow-delay="0.6s">
+                    <i class="fa fa-cog"></i>
+                    <h4>User Requests</h4>
+                    <p>Click here </p>
+                    <p>to view your new</p>
+                    <p>request from any users</p>
+                    <p><a href="/viewrequest"><button class="btn btn-info">View</button></a></p>
+                </div>
+                {% elif usertype == 'contractor' %}
+                <div class="col-md-4 wow fadeIn" data-wow-offset="50" data-wow-delay="0.6s">
+                    <i class="fa fa-cog"></i>
+                    <h4>User Requests</h4>
+                    <p>Click here </p>
+                    <p>to view your new</p>
+                    <p>request from any users</p>
+                    <p><a href="/viewrequest"><button class="btn btn-info">View</button></a></p>
+                </div>
+                {% else %}
+                <div class="col-md-4 wow fadeIn" data-wow-offset="50" data-wow-delay="0.6s">
+                    <i class="fa fa-cog"></i>
+                    <h4>My Requests</h4>
+                    <p>Click here </p>
+                    <p>to view your new</p>
+                    <p>request from any users</p>
+                    <p><a href="/userrequest"><button class="btn btn-info">View</button></a></p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- end servie -->
+{% endblock %}

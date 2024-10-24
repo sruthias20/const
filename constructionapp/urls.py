@@ -1,0 +1,35 @@
+from django.urls import include, path
+
+from constructionapp import views
+
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('registration',views.registration,name='registration'),
+    path('login',views.login,name='login'),
+    path('services',views.services,name='services'),
+    path('team',views.team,name='team'),
+    path('teammembers/<str:user>',views.teammembers,name='teammembers'),
+    path('about',views.about,name='about'),
+    path('logout',views.logout,name='logout'),
+    path('profile',views.profile,name='profile'),
+    path('updateprofile',views.profile_update,name='updateprofile'),
+    path('myworks',views.myworks,name='myworks'),
+    path('workupload',views.work_upload,name='workupload'),
+    path('booking/<str:user>/<int:id>',views.booking_fun,name='booking'),
+    path('projects',views.projects,name='projects'),
+    path('viewrequest',views.view_request,name='viewrequest'),
+    path('userrequest',views.user_requests,name='userrequests'),
+    path('download-image/<path:image_path>/', views.download_image, name='download_image'),
+    path('architect-rate/<int:person_id>/', views.architect_rate, name='architectrate'),
+    path('user-submit-to-architect',views.user_submit_to_architect,name='user_submit_toarchitect'),
+    path('user-submit-to-designer',views.user_submit_to_designer,name='user_submit_to_designer'),
+    path('user-submit-to-contractor',views.user_submit_to_contractor,name='user_submit_to_contractor'),
+    path('payment',views.payment,name='payment'),
+    path('architectdesign/<int:person_id>/', views.architect_design, name='architectdesign'),
+    path('status-update/<int:person_id>',views.status_update,name='status_update'),
+    path('user-architecture-interest',views.user_architecture_interest,name='user_architecture_interest'),
+    path('delete_request/<int:id>',views.delete_request,name='delete_request'),
+    path('delete_request1/<int:id>',views.delete_request1,name='delete_request'),
+    path('delete_request2/<int:id>',views.delete_request2,name='delete_request'),
+    path('user_designer_interest',views.user_designer_interest,name='user_designer_interest'),
+]

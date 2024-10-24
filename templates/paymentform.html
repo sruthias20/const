@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - Booking{% endblock %}
+{% block body %}
+<!-- start registration-->
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">PAYMENT  <span>FORM</span>
+                </h2>
+            </div>
+            <div class="col-md-12 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.9s" style="padding-left: 300px;width: 900px;">
+                
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                    {% for i in messages %}
+                    {{i}}
+                    {% endfor %}
+                </div>
+                    {% endif %}
+                <img src="/static/images/Creditcard.png" alt="no image" style="width: 300px;height: 250px;padding-left: 100px;">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <label>AMOUNT TO PAY</label>
+                    <input name="amount" type="text" class="form-control" id="amount">
+                    
+                    <label>CARD NUMBER</label>
+                    <input name="cardnumber" type="text" class="form-control" id="cardnumber">
+
+                    <label>CARD HOLDER</label>
+                    <input name="cardholder" type="text" class="form-control" id="cardholder">
+
+                    <label>EXPIRATION DATE</label>
+                    <input name="edate" type="date" class="form-control" id="edate">
+
+                    <label>CVV</label>
+                    <input name="cvv" type="text" class="form-control" id="cvv">
+
+                    <input type="submit" class="form-control" value="Confirm payment">
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!-- end registration -->
+
+{% endblock %}

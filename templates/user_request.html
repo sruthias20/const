@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - About{% endblock %}
+{% block body %}
+   	<!-- start about -->
+       <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">USER <span>REQUESTS</span></h2>
+                </div>
+                {% for i in data %}
+                <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                    <div class="media">
+                        <div class="media-heading-wrapper">
+                            <div class="media-object pull-left">
+                                <i class="fa fa-mobile"></i>
+                            </div>
+                            <h3 class="media-heading">{{i.BookingPerson}}</h3>
+                            
+                        </div>
+                        <div class="media-body">
+                            <a href="/delete_request/{{i.id}}"><button class="btn btn-danger">Delete</button></a>
+                            <h4>Requested Architect : {{booked.Name}}</h4>
+                            <h4>Request Status : {{i.RequesttoArchitect}}</h4>
+                            {% if i.RequesttoArchitect == 'accepted' %}
+                            <h4>Architecture Rate : {{i.Price}}</h4>
+                            <form method="POST" action="{% url 'user_submit_toarchitect'  %}">
+                                {% csrf_token %}
+                                <select name="userstatus" id="userstatus" style="color: black;">
+                                    <option>Select your status</option>
+                                    <option value="accepted">Accept</option>
+                                    <option value="declined">Decline</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </form>
+                            {% endif %}
+                            {% if i.RequestfromArchitect == 'accepted' %}
+                            <a href="/payment"><button class="btn btn-info">Payment Form</button></a>
+                            {% endif %}
+                            {% if i.File != 'pending' %}
+                            <h4>Your home architecture</h4>
+                            <img src="{{i.File}}" alt="no image" style="width:150px;height:100px;">
+                            <a href="{% url 'download_image' i.File %}" class="btn btn-primary">Download</a>
+                            <form method="POST" action="{% url 'user_architecture_interest' %}">
+                                {% csrf_token %}
+                            <select name="status" style="color: black;">
+                                <option>Do you like the result??</option>
+                                <option value="NotGood">No</option>
+                                <option value="Good">Yes</option>
+                            </select>
+                            <input type="submit" value="submit" class="btn btn-info">
+                        </form>
+                            {% else %}
+                            <h4>Your file is {{i.File}}</h4>
+                            
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for i in data2 %}
+                <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                    <div class="media">
+                        <div class="media-heading-wrapper">
+                            <div class="media-object pull-left">
+                                <i class="fa fa-mobile"></i>
+                            </div>
+                            <h3 class="media-heading">{{i.BookingPerson}}</h3>
+                        </div>
+                        <div class="media-body">
+                            <a href="/delete_request1/{{i.id}}"><button class="btn btn-danger">Delete</button></a>
+                            <h4>Requested Designer : {{booked1.designer.Name}}</h4>
+                            <h4>Request Status : {{i.RequesttoDesigner}}</h4>
+                            {% if i.RequesttoDesigner == 'accepted' %}
+                            <h4>Designer Rate : {{i.Price}}</h4>
+                            <form method="POST" action="{% url 'user_submit_to_designer'  %}">
+                                {% csrf_token %}
+                                <select name="userstatus" id="userstatus" style="color: black;">
+                                    <option>Select your status</option>
+                                    <option value="accepted">Accept</option>
+                                    <option value="declined">Decline</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </form>
+                            {% endif %}
+                            {% if i.RequestfromDesigner == 'accepted' %}
+                            <a href="/payment"><button class="btn btn-info">Payment Form</button></a>
+                            {% endif %}
+                            {% if i.File != 'pending' %}
+                            <h4>Your home design</h4>
+                            <img src="{{i.File}}" alt="no image" style="width:150px;height:100px;">
+                            <a href="{% url 'download_image' i.File %}" class="btn btn-primary">Download</a>
+                            <form method="POST" action="{% url 'user_designer_interest' %}">
+                                {% csrf_token %}
+                            <select name="status" style="color: black;">
+                                <option>Do you like the result??</option>
+                                <option value="NotGood">No</option>
+                                <option value="Good">Yes</option>
+                            </select>
+                            <input type="submit" value="submit" class="btn btn-info">
+                        </form>
+                            {% else %}
+                            <h4>Your file is {{i.File}}</h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% for i in data3 %}
+                <div class="col-md-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-offset="50" data-wow-delay="0.6s">
+                    <div class="media">
+                        <div class="media-heading-wrapper">
+                            <div class="media-object pull-left">
+                                <i class="fa fa-mobile"></i>
+                            </div>
+                            <h3 class="media-heading">{{i.BookingPerson}}</h3>
+                        </div>
+                        <div class="media-body">
+                            <a href="/delete_request2/{{i.id}}"><button class="btn btn-danger">Delete</button></a>
+                            <h4>Requested Contractor : {{booked2.Name}}</h4>
+                            <h4>Request Status : {{i.RequesttoContractor}}</h4>
+                            {% if i.RequesttoContractor == 'accepted' %}
+                            <h4>Contractor Rate : {{i.Price}}</h4>
+                            <form method="POST" action="{% url 'user_submit_to_contractor'  %}">
+                                {% csrf_token %}
+                                <select name="userstatus" id="userstatus" style="color: black;">
+                                    <option style="color: black;">Select your status</option>
+                                    <option value="accepted">Accept</option>
+                                    <option value="declined">Decline</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </form>
+                            
+                            {% endif %}
+                            {% if i.RequestfromContractor == 'accepted' %}
+                            <a href="/payment"><button class="btn btn-info">Payment Form</button></a>
+                            {% endif %}
+                            {% if i.Payment == 'success' %}
+                            <div>
+                                <h4>Contractor will contact you through phone</h4>
+                            </div>
+                            {% elif i.Payment == 'failed' %}
+                            <div>
+                                <h4>Payment failed</h4>
+                            </div>
+                            {% else %}
+                            <div>
+                                <h4>Payment pending</h4>
+                            </div>
+                            {% endif %}
+                            <!-- {% if i.File != 'pending' %}
+                            <h4>Your home architecture</h4>
+                            <img src="{{i.File}}" alt="no image" style="width:150px;height:100px;">
+                            
+                            {% else %}
+                            <h4>Your file is {{i.File}}</h4>
+                            {% endif %} -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <!-- end about -->
+{% endblock %}

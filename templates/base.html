@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/animate.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- <script src="/static/js/jquery.singlePageNav.min.js"></script> -->
+    <script src="/static/js/typed.js"></script>
+    <script src="/static/js/wow.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+</head>
+
+<body >
+
+    <!-- start preloader -->
+    <!-- <div class="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div> -->
+    <!-- end preloader -->
+
+    <!-- start header -->
+    <header>
+        {% if logged_in_user %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <p><i class="fa fa-user"></i><span> Logined</span>As</p>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <p><span></span><a href="">{{logged_in_user.Name}}</a></p>
+                </div>
+                <div class="col-md-5 col-sm-4 col-xs-12">
+                    <ul class="social-icon">
+                        <li><span>Meet us on</span></li>
+                        <li><a href="#" class="fa fa-facebook"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" class="fa fa-instagram"></a></li>
+                        <li><a href="#" class="fa fa-apple"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </header>
+    <!-- end header -->
+    <!-- start navigation -->
+    <nav class="navbar navbar-default templatemo-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+                <a href="{% url 'registration' %}" class="navbar-brand">Construction Planner</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">HOME</a></li>
+                    
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/team">TEAM</a></li>
+                    <li><a href="/services">SERVICE</a></li>
+                    {% if user == 'user' %}
+                    <li><a href="/team">BOOKING</a></li>
+                    {% endif %}
+                    <li><a href="/registration">REGISTER</a></li>
+                    {% if logged_in_user %}
+                    <li><a href="/logout">LOGOUT</a></li>
+                    <li><a href="/profile">PROFILE</a></li>
+                    {% else %}
+                    <li><a href="/login">LOGIN</a></li>
+                    <li><a href="/admin">ADMIN</a></li>
+                    {% endif %}
+                    <li><a href="/projects">PROJECTS</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end navigation -->
+    {% block body %}{% endblock %}
+
+    <!-- start copyright -->
+    <footer id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s">
+                        Copyright &copy; 2024 Construction planner</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end copyright -->
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Construction planner - Projects{% endblock %}
+{% block body %}
+ <!-- start portfolio -->
+       <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="wow bounceIn" data-wow-offset="50" data-wow-delay="0.3s"><span>AWESOME</span> PROJECTS</h2>
+                </div>
+                {% for i in data %}
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-offset="50" data-wow-delay="0.6s">
+                    <div class="portfolio-thumb">
+                       <img src="{{i.Picture}}" class="img-responsive" alt="portfolio img 1"  style="height: 300px;">
+                            <div class="portfolio-overlay">
+                                <h4>{{i.Upload_by}}</h4>
+                                
+                                
+                            </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- end portfolio -->
+    {% endblock %}
